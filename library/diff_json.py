@@ -25,38 +25,15 @@ options:
 
 author:
     - Roberto Carratala (@rcarrata)
+    - Asier Cidón (@acidonpe)
 '''
 
 EXAMPLES = '''
-original = {
-    "jsonrpc": "2.0",
-    "method": "substract",
-    "params": [42],
-    "id": 5,
-    "newversion": "true",
-}
-
-modified = {
-    "jsonrpc": "2.0",
-    "method": "substract",
-    "params": [31],
-}
-
-# Pass in a message
-- name: Test with a message
-  my_test:
-    name: hello world
-
-# pass in a message and have changed true
-- name: Test with a message and changed output
-  my_test:
-    name: hello world
-    new: true
-
-# fail the module
-- name: Test failure of the module
-  my_test:
-    name: fail me
+- name: Run and test the diff json module
+    diff_json:
+    original: "{'a': 1, 'b': 2}"
+    compared: "{'a': 1, 'b': 3, 'c': 4}"
+    register: diff
 '''
 
 def compare(orig_json,comp_json):

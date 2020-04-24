@@ -1,0 +1,25 @@
+---
+
+- name: Test my new module
+  hosts: localhost
+  vars:
+   - json1: {'a': 1, 'b': 2}
+   - json2: {'b': 3, 'c': 4}
+  tasks:
+
+    - name: Run and test the diff json module
+      diff_json:
+        original: "{{ json1 }}"
+        compared: "{{ json2 }}"
+      register: diff
+
+    - name: Debug the full output
+      debug:
+        msg: "{{ diff }}"
+
+    - name:
+      debug:
+        msg: 
+        - "This is the original message {{ diff.original_json }}"
+        - "This is the message to compare {{ diff.compared_json }}"
+        - "This is the comparison {{ diff.comparison }}"
