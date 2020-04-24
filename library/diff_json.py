@@ -23,7 +23,7 @@ options:
             - Compared Json file
         required: true
 
-author:
+authors:
     - Roberto Carratala (@rcarrata)
     - Asier Cidón (@acidonpe)
 '''
@@ -37,11 +37,9 @@ EXAMPLES = '''
 '''
 
 def compare(orig_json,comp_json):
-    
-
+    """Function for compare two json files """
     result = diff(orig_json,comp_json)
-    strresult = str(result)
-    return strresult
+    return result
 
 def run_module():
     """Run Ansible Module with parameters"""
@@ -57,11 +55,14 @@ def run_module():
         message=''
     )
 
+    # Instantiation of the AnsibleModule as module with argument_specs
+    # assigned in a dict before.
     module = AnsibleModule(
         argument_spec = module_args,
         supports_check_mode=True
     )
 
+    # Check mode - Dry run
     if module.check_mode:
         module.exit_json(**result)
 
@@ -69,12 +70,15 @@ def run_module():
     orig_json = module.params['original']
     comp_json = module.params['compared']
 
-    resume = compare(orig_json, comp_json)    
+    # Execute the comparation fromt he original and compared json files
+    # Assign the comparation to a string to be processed properly
+    resume = str(compare(orig_json, comp_json))    
 
+    # Fill the different result key/values
     result['original_json'] = module.params['original']
     result['compared_json'] = module.params['compared']
-    result['comparison'] = resume
-    result['message'] = 'Module is working correctly'
+    result['comparisons'] = resume
+    result['message'] = 'It works!'
 
     module.exit_json(**result)
 

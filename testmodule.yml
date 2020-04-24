@@ -22,4 +22,4 @@
         msg: 
         - "This is the original message {{ diff.original_json }}"
         - "This is the message to compare {{ diff.compared_json }}"
-        - "This is the comparison {{ diff.comparison }}"
+        - "This is the comparison {{ diff.comparisons }}"
