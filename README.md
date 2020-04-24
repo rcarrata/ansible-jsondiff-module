@@ -4,6 +4,8 @@
 
 Ansible Module for simple comparation between two json files
 
+The library folder containers the Ansible module
+
 ## Parameters
 
 | Parameter | Choices/Defaults |         Comments         |
